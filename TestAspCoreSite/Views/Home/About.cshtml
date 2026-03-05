@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "About";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <p class="lead">
+            This is a sample ASP.NET Core MVC application built with .NET 8.
+        </p>
+        <p>
+            It demonstrates how to build a multi-page web application with navigation,
+            server-side rendered views, and RESTful API controllers — all in a single project.
+        </p>
+
+        <h3 class="mt-4">Technologies Used</h3>
+        <ul>
+            <li>ASP.NET Core 8 MVC</li>
+            <li>Bootstrap 5 for responsive UI</li>
+            <li>RESTful Web API controllers</li>
+            <li>Razor Views</li>
+        </ul>
+
+        <h3 class="mt-4">Available API Endpoints</h3>
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge bg-success">GET</span></td>
+                    <td><a href="/api/weather">/api/weather</a></td>
+                    <td>Returns a 5-day weather forecast</td>
+                </tr>
+                <tr>
+                    <td><span class="badge bg-success">GET</span></td>
+                    <td><a href="/api/products">/api/products</a></td>
+                    <td>Returns the list of products</td>
+                </tr>
+                <tr>
+                    <td><span class="badge bg-success">GET</span></td>
+                    <td><a href="/api/products/1">/api/products/{id}</a></td>
+                    <td>Returns a single product by ID</td>
+                </tr>
+                <tr>
+                    <td><span class="badge bg-success">GET</span></td>
+                    <td><a href="/api/users">/api/users</a></td>
+                    <td>Returns the list of users</td>
+                </tr>
+                <tr>
+                    <td><span class="badge bg-success">GET</span></td>
+                    <td><a href="/api/users/1">/api/users/{id}</a></td>
+                    <td>Returns a single user by ID</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

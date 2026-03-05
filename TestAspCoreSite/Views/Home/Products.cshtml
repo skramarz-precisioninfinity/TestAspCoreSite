@@ -1,0 +1,59 @@
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p class="lead">Browse our sample product catalog. Data is loaded from the <a href="/api/products">/api/products</a> endpoint.</p>
+
+<div id="products-loading" class="text-center my-4">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Loading products&hellip;</p>
+</div>
+
+<div id="products-error" class="alert alert-danger d-none" role="alert">
+    Failed to load products.
+</div>
+
+<div id="products-container" class="row row-cols-1 row-cols-md-3 g-4 d-none"></div>
+
+@section Scripts {
+<script>
+    (async function () {
+        const loading = document.getElementById('products-loading');
+        const error = document.getElementById('products-error');
+        const container = document.getElementById('products-container');
+
+        try {
+            const response = await fetch('/api/products');
+            if (!response.ok) throw new Error('API error');
+            const products = await response.json();
+
+            products.forEach(p => {
+                const col = document.createElement('div');
+                col.className = 'col';
+                col.innerHTML = `
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">${p.name}</h5>
+                            <p class="card-text text-muted">${p.description}</p>
+                            <p class="card-text">
+                                <span class="badge bg-secondary">${p.category}</span>
+                                <strong class="ms-2">$${p.price.toFixed(2)}</strong>
+                            </p>
+                        </div>
+                        <div class="card-footer text-muted small">ID: ${p.id} &bull; Stock: ${p.stock}</div>
+                    </div>`;
+                container.appendChild(col);
+            });
+
+            loading.classList.add('d-none');
+            container.classList.remove('d-none');
+        } catch (e) {
+            loading.classList.add('d-none');
+            error.classList.remove('d-none');
+        }
+    })();
+</script>
+}
