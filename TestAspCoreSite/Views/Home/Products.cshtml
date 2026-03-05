@@ -1,0 +1,86 @@
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p class="lead">Browse our sample product catalog. Data is loaded from the <a href="/api/products">/api/products</a> endpoint.</p>
+
+<div id="products-loading" class="text-center my-4">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Loading products&hellip;</p>
+</div>
+
+<div id="products-error" class="alert alert-danger d-none" role="alert">
+    Failed to load products.
+</div>
+
+<div id="products-container" class="row row-cols-1 row-cols-md-3 g-4 d-none"></div>
+
+@section Scripts {
+<script>
+    (async function () {
+        const loading = document.getElementById('products-loading');
+        const error = document.getElementById('products-error');
+        const container = document.getElementById('products-container');
+
+        try {
+            const response = await fetch('/api/products');
+            if (!response.ok) throw new Error('API error');
+            const products = await response.json();
+
+            products.forEach(p => {
+                const col = document.createElement('div');
+                col.className = 'col';
+
+                const card = document.createElement('div');
+                card.className = 'card h-100 shadow-sm';
+
+                const body = document.createElement('div');
+                body.className = 'card-body';
+
+                const title = document.createElement('h5');
+                title.className = 'card-title';
+                title.textContent = p.name;
+
+                const desc = document.createElement('p');
+                desc.className = 'card-text text-muted';
+                desc.textContent = p.description;
+
+                const meta = document.createElement('p');
+                meta.className = 'card-text';
+
+                const badge = document.createElement('span');
+                badge.className = 'badge bg-secondary';
+                badge.textContent = p.category;
+
+                const price = document.createElement('strong');
+                price.className = 'ms-2';
+                price.textContent = `$${p.price.toFixed(2)}`;
+
+                meta.appendChild(badge);
+                meta.appendChild(price);
+                body.appendChild(title);
+                body.appendChild(desc);
+                body.appendChild(meta);
+
+                const footer = document.createElement('div');
+                footer.className = 'card-footer text-muted small';
+                footer.textContent = `ID: ${p.id} \u2022 Stock: ${p.stock}`;
+
+                card.appendChild(body);
+                card.appendChild(footer);
+                col.appendChild(card);
+                container.appendChild(col);
+            });
+
+            loading.classList.add('d-none');
+            container.classList.remove('d-none');
+        } catch (e) {
+            loading.classList.add('d-none');
+            error.classList.remove('d-none');
+        }
+    })();
+</script>
+}

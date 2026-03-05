@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center mb-5">
+    <h1 class="display-4">Welcome to TestAspCoreSite</h1>
+    <p class="lead">A sample ASP.NET Core MVC application with pages and REST API controllers.</p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">&#128100; About</h5>
+                <p class="card-text">Learn more about this sample application and the technologies it uses.</p>
+                <a asp-controller="Home" asp-action="About" class="btn btn-primary">Go to About</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">&#128722; Products</h5>
+                <p class="card-text">Browse the sample product catalog powered by a REST API.</p>
+                <a asp-controller="Home" asp-action="Products" class="btn btn-primary">Go to Products</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">&#9993;&#65039; Contact</h5>
+                <p class="card-text">Get in touch with us using the contact form.</p>
+                <a asp-controller="Home" asp-action="Contact" class="btn btn-primary">Go to Contact</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">&#127774; API Endpoints</h5>
+                <p class="card-text">Explore the sample REST API endpoints included in this project.</p>
+                <ul class="list-unstyled mt-2">
+                    <li><a href="/api/weather" class="text-decoration-none">GET /api/weather</a></li>
+                    <li><a href="/api/products" class="text-decoration-none">GET /api/products</a></li>
+                    <li><a href="/api/users" class="text-decoration-none">GET /api/users</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
